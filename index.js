@@ -8,10 +8,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const services = {
-  posts:'http://localhost:4000/events',
-  comments:'http://localhost:4001/events',
-  query:'http://localhost:4002/events',
-  moderation: 'http://localhost:4003/events'
+  posts:'http://posts-srv:4000/events',
+  comments:'http://comments-srv:4001/events',
+  query:'http://query-srv:4002/events',
+  moderation: 'http://moderation-srv:4003/events'
 }
 
 app.post('/events', (req, res) => {
@@ -19,6 +19,7 @@ app.post('/events', (req, res) => {
   Object.values(services).forEach(endpoint => {
     axios.post(endpoint, event)
   });
+  res.send({});
 })
 
 const port = 4005
